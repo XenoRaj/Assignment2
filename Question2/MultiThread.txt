@@ -1,0 +1,308 @@
+With taskset Single client:
+ Performance counter stats for './serverMultithread':
+
+              7.52 msec task-clock                       #    0.001 CPUs utilized             
+                 2      context-switches                 #  266.053 /sec                      
+                 0      cpu-migrations                   #    0.000 /sec                      
+                71      page-faults                      #    9.445 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         9,645,602      cpu_core/cycles/                 #    1.283 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+        16,919,929      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+         3,136,741      cpu_core/branches/               #  417.269 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            23,681      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     32.5 %  tma_backend_bound      
+                                                  #      5.7 %  tma_bad_speculation    
+                                                  #     31.3 %  tma_frontend_bound     
+                                                  #     30.6 %  tma_retiring           
+
+      10.485776543 seconds time elapsed
+
+       0.001440000 seconds user
+       0.006748000 seconds sys
+
+ Performance counter stats for './client 127.0.0.1 1':
+
+              1.72 msec task-clock                       #    0.231 CPUs utilized             
+                 2      context-switches                 #    1.162 K/sec                     
+                 0      cpu-migrations                   #    0.000 /sec                      
+                76      page-faults                      #   44.164 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         2,056,496      cpu_core/cycles/                 #    1.195 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+         1,744,655      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+           315,155      cpu_core/branches/               #  183.139 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            12,617      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     18.9 %  tma_backend_bound      
+                                                  #     11.8 %  tma_bad_speculation    
+                                                  #     50.0 %  tma_frontend_bound     
+                                                  #     19.3 %  tma_retiring           
+
+       0.007444564 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002276000 seconds sys
+
+wihtout taskset 5 clients:
+
+ Performance counter stats for './serverMultithread':
+
+             25.02 msec task-clock                       #    0.002 CPUs utilized             
+                16      context-switches                 #  639.426 /sec                      
+                 4      cpu-migrations                   #  159.857 /sec                      
+               107      page-faults                      #    4.276 K/sec                     
+        19,501,033      cpu_atom/cycles/                 #    0.779 GHz                         (55.41%)
+        54,628,157      cpu_core/cycles/                 #    2.183 GHz                         (57.51%)
+        22,000,461      cpu_atom/instructions/           #    1.13  insn per cycle              (81.30%)
+       101,208,529      cpu_core/instructions/           #    5.19  insn per cycle              (57.51%)
+         4,039,659      cpu_atom/branches/               #  161.442 M/sec                       (81.20%)
+        18,748,345      cpu_core/branches/               #  749.262 M/sec                       (57.51%)
+            56,813      cpu_atom/branch-misses/          #    1.41% of all branches             (81.22%)
+           103,826      cpu_core/branch-misses/          #    2.57% of all branches             (57.51%)
+             TopdownL1 (cpu_core)                 #     35.5 %  tma_backend_bound      
+                                                  #      5.8 %  tma_bad_speculation    
+                                                  #     28.0 %  tma_frontend_bound     
+                                                  #     30.7 %  tma_retiring             (57.51%)
+             TopdownL1 (cpu_atom)                 #     17.9 %  tma_bad_speculation    
+                                                  #     22.6 %  tma_retiring           
+                                                  #     23.5 %  tma_backend_bound      
+                                                  #     23.5 %  tma_backend_bound_aux  
+                                                  #     36.0 %  tma_frontend_bound     
+
+      15.844993661 seconds time elapsed
+
+       0.005088000 seconds user
+       0.020594000 seconds sys
+
+
+ Performance counter stats for './client 127.0.0.1 5':
+
+              1.47 msec task-clock                       #    0.225 CPUs utilized             
+                 6      context-switches                 #    4.092 K/sec                     
+                 0      cpu-migrations                   #    0.000 /sec                      
+                90      page-faults                      #   61.377 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         3,047,619      cpu_core/cycles/                 #    2.078 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+         2,899,552      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+           529,019      cpu_core/branches/               #  360.773 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            17,538      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     25.3 %  tma_backend_bound      
+                                                  #      9.7 %  tma_bad_speculation    
+                                                  #     47.0 %  tma_frontend_bound     
+                                                  #     18.0 %  tma_retiring           
+
+       0.006515378 seconds time elapsed
+
+       0.000423000 seconds user
+       0.001218000 seconds sys
+
+with taskset 5 clients:
+ Performance counter stats for './serverMultithread':
+
+             28.31 msec task-clock                       #    0.002 CPUs utilized             
+                11      context-switches                 #  388.500 /sec                      
+                 0      cpu-migrations                   #    0.000 /sec                      
+               108      page-faults                      #    3.814 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+        36,374,226      cpu_core/cycles/                 #    1.285 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+        79,074,201      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+        14,680,387      cpu_core/branches/               #  518.484 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            67,043      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     25.5 %  tma_backend_bound      
+                                                  #      4.6 %  tma_bad_speculation    
+                                                  #     32.5 %  tma_frontend_bound     
+                                                  #     37.4 %  tma_retiring           
+
+      12.127919086 seconds time elapsed
+
+       0.009741000 seconds user
+       0.018509000 seconds sys
+
+Performance counter stats for './client 127.0.0.1 5':
+
+              2.48 msec task-clock                       #    0.087 CPUs utilized             
+                 9      context-switches                 #    3.632 K/sec                     
+                 0      cpu-migrations                   #    0.000 /sec                      
+                89      page-faults                      #   35.916 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         3,175,025      cpu_core/cycles/                 #    1.281 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+         2,919,015      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+           531,583      cpu_core/branches/               #  214.522 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            16,074      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     18.6 %  tma_backend_bound      
+                                                  #     10.5 %  tma_bad_speculation    
+                                                  #     47.7 %  tma_frontend_bound     
+                                                  #     23.2 %  tma_retiring           
+
+       0.028601148 seconds time elapsed
+
+       0.000000000 seconds user
+       0.002912000 seconds sys
+
+with taskset 3 clients
+
+ Performance counter stats for './serverMultithread':
+
+             17.19 msec task-clock                       #    0.002 CPUs utilized             
+                 6      context-switches                 #  349.058 /sec                      
+                 0      cpu-migrations                   #    0.000 /sec                      
+                89      page-faults                      #    5.178 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+        23,292,888      cpu_core/cycles/                 #    1.355 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+        48,439,004      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+         8,987,282      cpu_core/branches/               #  522.847 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            46,560      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     26.5 %  tma_backend_bound      
+                                                  #      4.8 %  tma_bad_speculation    
+                                                  #     32.3 %  tma_frontend_bound     
+                                                  #     36.4 %  tma_retiring           
+
+      10.666147521 seconds time elapsed
+
+       0.004078000 seconds user
+       0.013255000 seconds sys
+
+Performance counter stats for './client 127.0.0.1 3':
+
+              2.00 msec task-clock                       #    0.119 CPUs utilized             
+                 5      context-switches                 #    2.498 K/sec                     
+                 0      cpu-migrations                   #    0.000 /sec                      
+                82      page-faults                      #   40.963 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         2,636,674      cpu_core/cycles/                 #    1.317 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+         2,329,063      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+           423,300      cpu_core/branches/               #  211.460 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            15,118      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     18.9 %  tma_backend_bound      
+                                                  #     11.2 %  tma_bad_speculation    
+                                                  #     48.6 %  tma_frontend_bound     
+                                                  #     21.4 %  tma_retiring           
+
+       0.016788816 seconds time elapsed
+
+       0.002157000 seconds user
+       0.000289000 seconds sys
+
+
+with taskset 10 clients:
+ Performance counter stats for './serverMultithread':
+
+             39.69 msec task-clock                       #    0.002 CPUs utilized             
+                 9      context-switches                 #  226.778 /sec                      
+                 0      cpu-migrations                   #    0.000 /sec                      
+               143      page-faults                      #    3.603 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+        72,157,528      cpu_core/cycles/                 #    1.818 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+       160,357,493      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+        29,775,919      cpu_core/branches/               #  750.282 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+           120,081      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     25.6 %  tma_backend_bound      
+                                                  #      4.2 %  tma_bad_speculation    
+                                                  #     31.8 %  tma_frontend_bound     
+                                                  #     38.4 %  tma_retiring           
+
+      17.171157062 seconds time elapsed
+
+       0.004872000 seconds user
+       0.034823000 seconds sys
+
+ Performance counter stats for './client 127.0.0.1 10':
+
+              3.07 msec task-clock                       #    0.079 CPUs utilized             
+                12      context-switches                 #    3.908 K/sec                     
+                 0      cpu-migrations                   #    0.000 /sec                      
+               104      page-faults                      #   33.872 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         4,483,443      cpu_core/cycles/                 #    1.460 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+         4,349,173      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+           794,099      cpu_core/branches/               #  258.632 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            17,975      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     20.4 %  tma_backend_bound      
+                                                  #      8.8 %  tma_bad_speculation    
+                                                  #     45.4 %  tma_frontend_bound     
+                                                  #     25.4 %  tma_retiring           
+
+       0.039065887 seconds time elapsed
+
+       0.000000000 seconds user
+       0.003052000 seconds sys
+
+without taskset 10 clients:
+
+ Performance counter stats for './serverMultithread':
+
+             87.25 msec task-clock                       #    0.005 CPUs utilized             
+                32      context-switches                 #  366.747 /sec                      
+                12      cpu-migrations                   #  137.530 /sec                      
+               125      page-faults                      #    1.433 K/sec                     
+        61,193,725      cpu_atom/cycles/                 #    0.701 GHz                         (49.07%)
+        94,514,926      cpu_core/cycles/                 #    1.083 GHz                         (65.48%)
+        68,137,205      cpu_atom/instructions/           #    1.11  insn per cycle              (62.10%)
+       168,899,992      cpu_core/instructions/           #    2.76  insn per cycle              (65.48%)
+        12,616,075      cpu_atom/branches/               #  144.591 M/sec                       (65.38%)
+        31,251,693      cpu_core/branches/               #  358.171 M/sec                       (65.48%)
+           154,645      cpu_atom/branch-misses/          #    1.23% of all branches             (65.92%)
+           177,154      cpu_core/branch-misses/          #    1.40% of all branches             (65.48%)
+             TopdownL1 (cpu_core)                 #     33.7 %  tma_backend_bound      
+                                                  #      5.4 %  tma_bad_speculation    
+                                                  #     29.2 %  tma_frontend_bound     
+                                                  #     31.7 %  tma_retiring             (65.48%)
+             TopdownL1 (cpu_atom)                 #     14.9 %  tma_bad_speculation    
+                                                  #     25.4 %  tma_retiring             (65.91%)
+                                                  #     24.0 %  tma_backend_bound      
+                                                  #     24.0 %  tma_backend_bound_aux  
+                                                  #     35.6 %  tma_frontend_bound       (65.92%)
+
+      16.011698775 seconds time elapsed
+
+       0.011677000 seconds user
+       0.075518000 seconds sys
+
+ Performance counter stats for './client 127.0.0.1 10':
+
+              3.74 msec task-clock                       #    0.003 CPUs utilized             
+                18      context-switches                 #    4.810 K/sec                     
+                 0      cpu-migrations                   #    0.000 /sec                      
+               105      page-faults                      #   28.055 K/sec                     
+     <not counted>      cpu_atom/cycles/                                                        (0.00%)
+         4,353,784      cpu_core/cycles/                 #    1.163 GHz                       
+     <not counted>      cpu_atom/instructions/                                                  (0.00%)
+         4,357,422      cpu_core/instructions/                                                
+     <not counted>      cpu_atom/branches/                                                      (0.00%)
+           797,852      cpu_core/branches/               #  213.182 M/sec                     
+     <not counted>      cpu_atom/branch-misses/                                                 (0.00%)
+            23,730      cpu_core/branch-misses/                                               
+             TopdownL1 (cpu_core)                 #     20.6 %  tma_backend_bound      
+                                                  #      9.2 %  tma_bad_speculation    
+                                                  #     49.8 %  tma_frontend_bound     
+                                                  #     20.4 %  tma_retiring           
+
+       1.070498797 seconds time elapsed
+
+       0.000000000 seconds user
+       0.003974000 seconds sys
