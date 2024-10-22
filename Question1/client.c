@@ -50,8 +50,8 @@ void *client_thread(void *arg)
 
     printf("Client %d connected...\n", data->client_id);
     char message[1024] = "Request_CPU_Information\n";
-    while (1)
-    {
+    //while (1)
+    //{
         if (send(sock, message, strlen(message), 0) < 0)
         {
             perror("Send failed");
@@ -63,13 +63,13 @@ void *client_thread(void *arg)
         {
             buffer[read_size] = '\0';
             printf("Server response for client %d:\n%s\n", data->client_id, buffer);
-            break;
+            //break;
         }
         else
         {
             printf("No response received for client %d\n", data->client_id);
         }
-    }
+    //}
 
     close(sock);
     free(data); // Free allocated memory for client data
