@@ -49,18 +49,27 @@ void *client_thread(void *arg)
     }
 
     printf("Client %d connected...\n", data->client_id);
-
-    // Receive response from server
-    int read_size = recv(sock, buffer, BUFFER_SIZE, 0);
-    if (read_size > 0)
-    {
-        buffer[read_size] = '\0';
-        printf("Server response for client %d:\n%s\n", data->client_id, buffer);
-    }
-    else
-    {
-        printf("No response received for client %d\n", data->client_id);
-    }
+    char message[1024] = "Request_CPU_Information\n";
+    //while (1)
+    //{
+        if (send(sock, message, strlen(message), 0) < 0)
+        {
+            perror("Send failed");
+            return NULL;
+        }
+        // Receive response from server
+        int read_size = recv(sock, buffer, BUFFER_SIZE, 0);
+        if (read_size > 0)
+        {
+            buffer[read_size] = '\0';
+            printf("Server response for client %d:\n%s\n", data->client_id, buffer);
+            //break;
+        }
+        else
+        {
+            printf("No response received for client %d\n", data->client_id);
+        }
+    //}
 
     close(sock);
     free(data); // Free allocated memory for client data
