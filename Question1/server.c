@@ -85,28 +85,43 @@ void get_top_cpu_processes(ProcessInfo *top_processes)
 void *handle_client(void *client_sock_ptr)
 {
     char buffer[BUFFER_SIZE];
+    memset(buffer, '\0', sizeof(buffer));
     int client_sock = *(int *)client_sock_ptr;
     free(client_sock_ptr);
 
-    // int read_size = recv(client_sock, buffer, sizeof(buffer), 0);
-    // if (read_size > 0)
-    // {
-    //     if (strcmp(buffer, "Request_CPU_Information\n") == 0)
-    //     {
-    //     }
-    // }
+     int read_size = recv(client_sock, buffer, sizeof(buffer), 0);
+     if (read_size > 0)
+     {
+         if (strcmp(buffer, "Request_CPU_Information\n") == 0)
+        {
+          ProcessInfo top_processes[MAX_PROCESSES];
+      get_top_cpu_processes(top_processes);
+
+      snprintf(buffer, sizeof(buffer),
+               "Top 2 CPU-consuming processes:\n"
+               "1. Name: %s, PID: %d, User Time: %llu, Kernel Time: %llu\n"
+               "2. Name: %s, PID: %d, User Time: %llu, Kernel Time: %llu\n",
+               top_processes[0].name, top_processes[0].pid,
+               top_processes[0].user_time, top_processes[0].kernel_time,
+               top_processes[1].name, top_processes[1].pid,
+               top_processes[1].user_time, top_processes[1].kernel_time);
+        }
+        else {
+          printf("INVALID REQUEST");
+        }
+     }
 
     ProcessInfo top_processes[MAX_PROCESSES];
     get_top_cpu_processes(top_processes);
 
-    snprintf(buffer, sizeof(buffer),
-             "Top 2 CPU-consuming processes:\n"
-             "1. Name: %s, PID: %d, User Time: %llu, Kernel Time: %llu\n"
-             "2. Name: %s, PID: %d, User Time: %llu, Kernel Time: %llu\n",
-             top_processes[0].name, top_processes[0].pid,
-             top_processes[0].user_time, top_processes[0].kernel_time,
-             top_processes[1].name, top_processes[1].pid,
-             top_processes[1].user_time, top_processes[1].kernel_time);
+    //snprintf(buffer, sizeof(buffer),
+      //       "Top 2 CPU-consuming processes:\n"
+        //     "1. Name: %s, PID: %d, User Time: %llu, Kernel Time: %llu\n"
+          //   "2. Name: %s, PID: %d, User Time: %llu, Kernel Time: %llu\n",
+            // top_processes[0].name, top_processes[0].pid,
+             //top_processes[0].user_time, top_processes[0].kernel_time,
+             //top_processes[1].name, top_processes[1].pid,
+             //top_processes[1].user_time, top_processes[1].kernel_time);
 
     send(client_sock, buffer, strlen(buffer), 0);
     // close(client_sock);
